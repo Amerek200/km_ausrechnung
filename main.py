@@ -16,6 +16,8 @@ class TourAverage():
 		try:
 			results = self.read_file()
 			output = self.get_month_total(results)
+			#sort via year & month.
+			output.sort(key=lambda dict: (dict["Jahr"], dict["Monat"]))
 			self.write_output(output)
 			return True
 		except (KeyError, PermissionError) as e:
@@ -77,9 +79,9 @@ class TourAverage():
 		date_splitted = [int(x) for x in date_splitted]
 		return date_splitted
 
-	def write_output(self, output):
+	def write_output(self, output): #year, month, km/day, working days
 		f = ["Jahr", "Monat", "km pro Tag", "Einsatztage"]
-		with open(self.out_file, "w") as file:
+		with open(self.out_file, "w", newline="") as file:
 			writer = csv.DictWriter(file, fieldnames = f)
 			writer.writeheader()
 			for element in output:

@@ -5,7 +5,7 @@ from tkinter import messagebox, filedialog
 
 #TODO: Error handling. (correct .csv, check for viable out_file path, catch keyerror) ?
 #TODO: remove ugly delimiter dictonary and use if - elif for space and tab?
-
+#TODO: Output .csv got blank lines in between the data lines?
 #QUESTION: Initialdir set correctly? Dont think so
 #QUESTION: Best way to check/validate path?
 
