@@ -2,10 +2,10 @@ from main import TourAverage
 from tkinter import *
 from tkinter import messagebox, filedialog
 
-#TODO: disable button until all values are correct.
-#TODO: Error handling. (correct .csv, check for viable out_file path, catch keyerror)
-#TODO: Trennzeichen
+
+#TODO: Error handling. (correct .csv, check for viable out_file path, catch keyerror) ?
 #TODO: remove ugly delimiter dictonary and use if - elif for space and tab?
+
 #QUESTION: Initialdir set correctly? Dont think so
 #QUESTION: Best way to check/validate path?
 
@@ -139,7 +139,7 @@ class GUI():
         else:
             return False
 
-    #feeds values into & runs the main script, prints out error if keyError or PermissionError arises. 
+    #feeds values into & runs the main script, prints out error if keyError or PermissionError arises.
     def run(self):
         if self.set_values():
             E = TourAverage()
