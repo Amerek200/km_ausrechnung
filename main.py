@@ -1,6 +1,5 @@
-
 import csv
-
+from os import path
 
 class TourAverage():
 	def __init__(self):
@@ -14,13 +13,14 @@ class TourAverage():
 
 	def run(self):
 		try:
+			self.check_paths()
 			results = self.read_file()
 			output = self.get_month_total(results)
 			#sort via year & month.
 			output.sort(key=lambda dict: (dict["Jahr"], dict["Monat"]))
 			self.write_output(output)
 			return True
-		except (KeyError, PermissionError) as e:
+		except (KeyError, PermissionError, PathError) as e:
 			return e
 
 	def read_file(self):
@@ -87,7 +87,15 @@ class TourAverage():
 			for element in output:
 				writer.writerow(element)
 
+	def check_paths(self):
+		#r prefix = string will be treated as raw string, ingnoring str escapes etc. ("\n", )
+		out_path = self.out_file.rsplit("/", 1)
+		print(f"out_path == {out_path}")
+		if path.exists(self.in_file) == False or path.exists(out_path[0]) == False:
+			raise PathError("Bitte Input/Output Pfad überprüfen.")
 
+class PathError(Exception): #used for check_paths
+	pass
 
 if __name__ == "__main__":
 	t = TourAverage()

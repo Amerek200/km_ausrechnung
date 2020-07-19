@@ -3,11 +3,10 @@ from tkinter import *
 from tkinter import messagebox, filedialog
 
 
-#TODO: Error handling. (correct .csv, check for viable out_file path, catch keyerror) ?
+#TODO: Use os.path.exists for path checking., maybe os.path.split
 #TODO: remove ugly delimiter dictonary and use if - elif for space and tab?
-#TODO: Output .csv got blank lines in between the data lines?
 #QUESTION: Initialdir set correctly? Dont think so
-#QUESTION: Best way to check/validate path?
+#QUESTION: Best way to check/validate path? right now done by using path.exists (could run into problems with str escapes when path uses backslashes)
 
 
 class GUI():
@@ -33,7 +32,7 @@ class GUI():
         pass
 
     def param_frame(self):
-        frame = LabelFrame(self.root, text="placeholder", padx=5, pady=5)
+        frame = LabelFrame(self.root, padx=5, pady=5)
         frame.grid(row=0, column=0, padx=5, pady=5)
         #get input file
         label_in = Label(frame, text="Opheo Datei: (.csv)")
@@ -152,7 +151,7 @@ class GUI():
             E.delimiter = self.delimiter
             e = E.run()
             if e != True:
-                messagebox.showwarning("Fehler", f"Fehler bei Auswertung. \n {e}")
+                messagebox.showwarning("Fehler", f"Fehler bei Auswertung. \n{e}")
             else:
                 messagebox.showinfo("", "Datei erfolgreich ausgewertet.")
         else:
